@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "input_kind": "synthetic stereo fixture with deliberately imperfect estimates",
+  "format": {
+    "sample_rate_hz": 44100,
+    "channels": 2,
+    "frames": 52920
+  },
+  "mix": {
+    "rms_dbfs": -18.78506968864645,
+    "peak_dbfs": -6.143916432430893,
+    "crest_db": 12.641153256215558,
+    "over_full_scale_samples": 0
+  },
+  "estimated_stem_sum": {
+    "rms_dbfs": -18.477123978015847,
+    "peak_dbfs": -6.160928575713075,
+    "crest_db": 12.316195402302771,
+    "over_full_scale_samples": 0
+  },
+  "residual": {
+    "rms_dbfs": -44.31885943726523,
+    "peak_dbfs": -33.48503533134957,
+    "crest_db": 10.83382410591566,
+    "over_full_scale_samples": 0
+  },
+  "reconstruction": {
+    "sample_offset_frames": 0,
+    "rms_delta_db": 0.0,
+    "peak_delta_db": 0.0,
+    "target_rms_null_dbfs": -120.0,
+    "passed": true,
+    "rms_dbfs": -18.78506968864645,
+    "peak_dbfs": -6.143916432430893,
+    "crest_db": 12.641153256215558,
+    "over_full_scale_samples": 0,
+    "rms_error_dbfs": -386.918068907903,
+    "peak_error_dbfs": -349.1947949702182,
+    "snr_db": 368.1329992192565,
+    "exact_null": false,
+    "zero_lag_correlation": 1.0
+  },
+  "estimated_stems": {
+    "vocals": {
+      "rms_dbfs": -22.1717392197541,
+      "peak_dbfs": -17.51047254696086,
+      "crest_db": 4.661266672793243,
+      "over_full_scale_samples": 0
+    },
+    "drums": {
+      "rms_dbfs": -30.93826528989633,
+      "peak_dbfs": -13.887672303704582,
+      "crest_db": 17.05059298619175,
+      "over_full_scale_samples": 0
+    },
+    "bass": {
+      "rms_dbfs": -23.990628333753538,
+      "peak_dbfs": -19.1721462968355,
+      "crest_db": 4.818482036918034,
+      "over_full_scale_samples": 0
+    },
+    "other": {
+      "rms_dbfs": -26.7055835320507,
+      "peak_dbfs": -20.616822820609624,
+      "crest_db": 6.088760711441075,
+      "over_full_scale_samples": 0
+    }
+  },
+  "reference_comparison": {
+    "vocals": {
+      "fixed_gain_error": {
+        "rms_error_dbfs": -56.031828160312784,
+        "peak_error_dbfs": -51.21334612339474,
+        "snr_db": 33.8583897594204,
+        "exact_null": false,
+        "zero_lag_correlation": 0.9997944082653116
+      },
+      "si_sdr_db": 33.85830406308258,
+      "si_sdr_status": "finite",
+      "rms_delta_db": 0.0016991811382860433,
+      "first_difference_rms_delta_db": 0.0001774587085524859,
+      "reference_peak_window_delta_db": 0.11506493117021321,
+      "estimated_stereo": {
+        "interchannel_correlation": 0.9999999999999998,
+        "side_to_mid_db": null
+      },
+      "reference_stereo": {
+        "interchannel_correlation": 1.0,
+        "side_to_mid_db": null
+      },
+      "relative_reference_gain": {
+        "vocals": 1.0,
+        "drums": -6.039667366510826e-20,
+        "bass": 0.025,
+        "other": 2.5529694941141343e-19
+      }
+    },
+    "drums": {
+      "fixed_gain_error": {
+        "rms_error_dbfs": -42.652414439525884,
+        "peak_error_dbfs": -27.297066121443045,
+        "snr_db": 12.973989248551664,
+        "exact_null": false,
+        "zero_lag_correlation": 0.9813924662210963
+      },
+      "si_sdr_db": 14.170261160747714,
+      "si_sdr_status": "finite",
+      "rms_delta_db": -1.259840098922116,
+      "first_difference_rms_delta_db": -1.4080070615319262,
+      "reference_peak_window_delta_db": -1.3120440251661591,
+      "estimated_stereo": {
+        "interchannel_correlation": 0.9445908444442501,
+        "side_to_mid_db": -15.45246359549666
+      },
+      "reference_stereo": {
+        "interchannel_correlation": 0.9426200710445058,
+        "side_to_mid_db": -15.29627865306793
+      },
+      "relative_reference_gain": {
+        "vocals": 0.07,
+        "drums": 0.8500000000000002,
+        "bass": -6.75372782887262e-19,
+        "other": 2.314385123719888e-19
+      }
+    },
+    "bass": {
+      "fixed_gain_error": {
+        "rms_error_dbfs": null,
+        "peak_error_dbfs": null,
+        "snr_db": null,
+        "exact_null": true,
+        "zero_lag_correlation": 1.0
+      },
+      "si_sdr_db": null,
+      "si_sdr_status": "perfect projection",
+      "rms_delta_db": 0.0,
+      "first_difference_rms_delta_db": 0.0,
+      "reference_peak_window_delta_db": 0.0,
+      "estimated_stereo": {
+        "interchannel_correlation": 1.0,
+        "side_to_mid_db": null
+      },
+      "reference_stereo": {
+        "interchannel_correlation": 1.0,
+        "side_to_mid_db": null
+      },
+      "relative_reference_gain": {
+        "vocals": 6.848213008477153e-20,
+        "drums": 0.0,
+        "bass": 1.0,
+        "other": 0.0
+      }
+    },
+    "other": {
+      "fixed_gain_error": {
+        "rms_error_dbfs": -49.67842519097421,
+        "peak_error_dbfs": -32.57562827853842,
+        "snr_db": 22.951808799975776,
+        "exact_null": false,
+        "zero_lag_correlation": 0.9974751622561515
+      },
+      "si_sdr_db": 22.95089318979294,
+      "si_sdr_status": "finite",
+      "rms_delta_db": 0.02103285894773599,
+      "first_difference_rms_delta_db": 0.4193832503509534,
+      "reference_peak_window_delta_db": -3.312123840970571e-06,
+      "estimated_stereo": {
+        "interchannel_correlation": 0.003662140766846467,
+        "side_to_mid_db": -0.03143970824068809
+      },
+      "reference_stereo": {
+        "interchannel_correlation": -0.0007047441790734157,
+        "side_to_mid_db": 0.006049410919053422
+      },
+      "relative_reference_gain": {
+        "vocals": 1.9688612399371816e-19,
+        "drums": 0.10000000000000002,
+        "bass": -2.743595727662181e-19,
+        "other": 1.0
+      }
+    }
+  },
+  "model_run": null
+}

@@ -1,0 +1,35 @@
+name: Hi-Fi Spatial baseline build
+
+on:
+  push:
+    branches: [research/hifi-spatial-v2]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hifi-spatial-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify installed version UI
+        run: python3 scripts/check_version_ui.py
+      - name: Generate Xcode project
+        run: |
+          brew list xcodegen >/dev/null 2>&1 || brew install xcodegen
+          xcodegen generate
+      - name: Compile the app and widget
+        run: |
+          xcodebuild -project Timbre.xcodeproj -scheme Timbre -configuration Release \
+            -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build
+          app=build/Build/Products/Release-iphoneos/Timbre.app
+          test -x "$app/Timbre"
+          test -x "$app/PlugIns/TimbreWidget.appex/TimbreWidget"
