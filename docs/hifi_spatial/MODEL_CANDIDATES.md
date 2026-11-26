@@ -1,0 +1,27 @@
+# Four-stem separator candidates
+
+The separator estimates vocals, drums, bass, and other for selective placement. At zero spatial strength the reference remains the original stereo. With aligned estimates, the difference between the original and their sum becomes the direct residual. A low reconstruction null verifies that arithmetic. Leakage, transient detail, and the quality of an audible placement change require their own measurements.
+
+## First offline comparisons
+
+| Candidate | Why compare it | What to verify |
+| --- | --- | --- |
+| HT Demucs, `htdemucs` | Reproducible four-stem baseline with published 44.1 kHz stereo output. Run `htdemucs_ft` later as a higher-cost reference. | Export in float without independent stem rescaling. Record shifts, overlap, chunking, compute backend, and checkpoint checksum. [Demucs author-maintained implementation](https://github.com/adefossez/demucs) |
+| TFC-TDF-UNet v3 / MDX23C | Multi-source spectrogram-based candidate with public competition code and pretrained checkpoints. | Pin the checkpoint and inference config. Measure drum bleed and high-frequency errors as well as the end-to-end cost of STFT, chunking, and overlap-add. [KUIELab SDX 2023 implementation](https://github.com/kuielab/sdx23) |
+| Band-Split RoFormer | Transformer candidate with a published four-stem MUSDB18-HQ config and checkpoint. | Use the four-output release and make a separate evaluation on unfamiliar material. Record memory, boundary artifacts, and whether improved per-stem metrics translate into cleaner moves. [Architecture paper](https://arxiv.org/abs/2309.02612), [checkpoint publisher](https://github.com/ZFTurbo/Music-Source-Separation-Training/blob/main/docs/pretrained_models.md) |
+| Hybrid Spectrogram-TasNet | Low-latency research candidate to compare when chunking becomes a requirement. | Reproduce lookahead, chunk schedule and quality on the same mixes. Verify checkpoint and code availability, then measure sustained device throughput. [Low-latency music separation paper](https://arxiv.org/abs/2402.17701) |
+| Core ML and ONNX Runtime | Candidate execution paths for the same checkpoint. | Start with a fixed-size chunk and verify graph conversion, padding, STFT and output parity. Measure CPU fallback, accelerator coverage and peak memory separately. For WebAssembly and WebGPU, probe the actual WKWebView and exported model. [Core ML conversion guide](https://apple.github.io/coremltools/docs-guides/source/convert-pytorch-workflow.html), [ONNX Runtime Core ML provider](https://onnxruntime.ai/docs/execution-providers/CoreML-ExecutionProvider.html), [ONNX Runtime Web](https://onnxruntime.ai/docs/tutorials/web/) |
+
+Use `htdemucs` first to establish a repeatable external-model run. Compare MDX23C and Band-Split RoFormer against that run with the same inputs and report settings. Published rankings use different datasets, training splits, and evaluation rules. The Milestone 1 benchmark exercises the evaluation path with synthetic estimates. Model quality and runtime rankings are pending.
+
+Streaming offline architectures is a separate option. One published experiment used a sliding input window and short output hops with HT-Demucs and SCNet. Its latency and throughput evidence applies to the reported setup. Measure the extra compute and quality at the chosen hop before using the approach on a phone. [Streaming adaptation study](https://arxiv.org/abs/2609.35397)
+
+## Fair evaluation
+
+1. Use stereo WAV and keep the decoded mix at its original rate, channel count, sample count, and level. Track the source timeline through the separator and record any resampling, compensated delay, or explicitly invalid edge region. Preserve the original PCM for reconstruction.
+2. Start with the deterministic four-stem fixture for wiring and metric checks. Use the same set of known multitracks for every music run. Keep additional permissioned excerpts that are unlikely to overlap with training data. MUSDB18-HQ provides 44.1 kHz stereo sources and separate training and test sets under educational-use terms. Obtain it locally and follow the track-specific rights described by the authors. [MUSDB18-HQ dataset and licence](https://zenodo.org/records/3338373)
+3. Report per-stem reference error and leakage, especially drum energy in vocals and vocal energy in drums. Inspect drum peaks, high-band energy, and stereo changes. Use unaligned and aligned comparisons where delay compensation is under test. Record any shift or missing edge samples before evaluating quality.
+4. Level-match listening comparisons using the same original mix. Keep bass and vocals fixed while moving drums, then score whether those other sources appear to move. Listen for cymbal and shaker texture, vocal consonants, and bass weight. Use objective results to diagnose observations.
+5. Record cold start, warm inference time, real-time factor (elapsed inference seconds divided by audio seconds), model bytes, peak process memory, CPU load, backend, chunk and overlap settings, first usable audio, and stalls or dropped chunks. For streaming, report lookahead and per-hop compute separately. Include median and tail times over repeated runs.
+
+Keep music, rendered stems, and weights outside Git. Track licence and checksum separately for each codebase, checkpoint, and dataset. The [benchmark README](../../research/separation_benchmark/README.md) describes how to supply local estimates.

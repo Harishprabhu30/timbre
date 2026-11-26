@@ -1,6 +1,6 @@
 # Audio quality benchmark
 
-This harness measures offline PCM before and after a DSP path. The software self-check verifies the measurement code on deterministic signals. The [Legacy Spatial harness](../legacy_spatial/) supplies actual macOS WebKit captures for the bypass and Legacy comparisons.
+This harness measures offline PCM before and after a DSP path. The software self-check verifies the measurement code on deterministic signals. The [Legacy Spatial harness](../reports/legacy_spatial_characterization.md) supplies actual macOS WebKit captures for the bypass and Legacy comparisons.
 
 ## Run from a fresh checkout
 
